@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>spark</groupId>
+    <artifactId>spark</artifactId>
+    <version>1.1.0-2</version>
+
+    <dependencies>
+
+    </dependencies>
+
+    <properties>
+
+        <package.fullversion>spark-1.1.0-bin-hadoop2.4</package.fullversion>
+        <package.installdir>/usr/share/spark</package.installdir>
+
+        <spark.download.url>http://d3kbcqa49mib13.cloudfront.net</spark.download.url>
+        <spark.download.filename>spark-1.1.0-bin-hadoop2.4.tgz</spark.download.filename>
+
+    </properties>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-5</version>
+                <executions>
+                    <execution>
+                        <id>download-test-data</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <url>${spark.download.url}</url>
+                            <fromFile>${spark.download.filename}</fromFile>
+                            <toDir>${project.build.directory}</toDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+
+                        <configuration>
+                            <verbose>true</verbose>
+                            <snapshotExpand>true</snapshotExpand>
+                            <!-- expand "SNAPSHOT" to what is in the "USER" env variable -->
+                            <snapshotEnv>USER</snapshotEnv>
+                            <verbose>true</verbose>
+                            <controlDir>${basedir}/src/deb/control</controlDir>
+
+                            <dataSet>
+
+                                <data>
+
+                                    <src>${project.build.directory}/${spark.download.filename}</src>
+                                    <type>archive</type>
+                                    <includes>**</includes>
+                                    <excludes>bin/**,sbin/**</excludes>
+
+                                    <mapper>
+                                        <type>perm</type>
+                                        <strip>1</strip>
+                                        <prefix>${package.installdir}</prefix>
+                                        <filemode>644</filemode>
+                                    </mapper>
+
+                                </data>
+
+                                <data>
+
+                                    <src>${project.build.directory}/${spark.download.filename}</src>
+                                    <type>archive</type>
+                                    <includes>bin/**,sbin/**</includes>
+
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>${package.installdir}</prefix>
+                                        <filemode>755</filemode>
+                                    </mapper>
+
+                                </data>
+
+
+                            </dataSet>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+</project>
