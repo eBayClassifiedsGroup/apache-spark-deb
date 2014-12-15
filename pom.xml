@@ -7,7 +7,7 @@
 
     <groupId>apache-spark</groupId>
     <artifactId>apache-spark</artifactId>
-    <version>1.1.0-2</version>
+    <version>1.1.0-5</version>
 
     <dependencies>
 
@@ -16,7 +16,7 @@
     <properties>
 
         <package.fullversion>spark-1.1.0-bin-hadoop2.4</package.fullversion>
-        <package.installdir>/usr/share/spark</package.installdir>
+        <package.installdir>/usr/share/apache-spark</package.installdir>
 
         <spark.download.url>http://d3kbcqa49mib13.cloudfront.net</spark.download.url>
         <spark.download.filename>spark-1.1.0-bin-hadoop2.4.tgz</spark.download.filename>
@@ -72,10 +72,24 @@
 
                                 <data>
 
+                                    <src>${basedir}/src/main/init.d/</src>
+                                    <type>directory</type>
+                                    <includes>**</includes>
+
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/etc/init.d</prefix>
+                                        <filemode>755</filemode>
+                                    </mapper>
+
+                                </data>
+
+                                <data>
+
                                     <src>${project.build.directory}/${spark.download.filename}</src>
                                     <type>archive</type>
                                     <includes>**</includes>
-                                    <excludes>bin/**,sbin/**</excludes>
+                                    <excludes>${package.installdir}/bin/**,${package.installdir}/sbin/**</excludes>
 
                                     <mapper>
                                         <type>perm</type>
@@ -90,10 +104,11 @@
 
                                     <src>${project.build.directory}/${spark.download.filename}</src>
                                     <type>archive</type>
-                                    <includes>bin/**,sbin/**</includes>
+                                    <includes>${package.installdir}/bin/**,${package.installdir}/sbin/**</includes>
 
                                     <mapper>
                                         <type>perm</type>
+                                        <strip>1</strip>
                                         <prefix>${package.installdir}</prefix>
                                         <filemode>755</filemode>
                                     </mapper>
