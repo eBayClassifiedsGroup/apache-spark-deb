@@ -7,7 +7,7 @@
 
     <groupId>apache-spark</groupId>
     <artifactId>apache-spark</artifactId>
-    <version>1.1.0-5</version>
+    <version>1.6.1-2</version>
 
     <dependencies>
 
@@ -15,11 +15,11 @@
 
     <properties>
 
-        <package.fullversion>spark-1.1.0-bin-hadoop2.4</package.fullversion>
+        <package.fullversion>spark-1.6.1-bin-hadoop2.4</package.fullversion>
         <package.installdir>/usr/share/apache-spark</package.installdir>
 
         <spark.download.url>http://d3kbcqa49mib13.cloudfront.net</spark.download.url>
-        <spark.download.filename>spark-1.1.0-bin-hadoop2.4.tgz</spark.download.filename>
+        <spark.download.filename>spark-1.6.1-bin-hadoop2.4.tgz</spark.download.filename>
 
     </properties>
 
@@ -30,7 +30,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0-beta-5</version>
+                <version>1.0</version>
                 <executions>
                     <execution>
                         <id>download-test-data</id>
@@ -89,7 +89,7 @@
                                     <src>${project.build.directory}/${spark.download.filename}</src>
                                     <type>archive</type>
                                     <includes>**</includes>
-                                    <excludes>${package.installdir}/bin/**,${package.installdir}/sbin/**</excludes>
+                                    <excludes>${package.fullversion}/bin/**,${package.fullversion}/sbin/**</excludes>
 
                                     <mapper>
                                         <type>perm</type>
@@ -104,7 +104,7 @@
 
                                     <src>${project.build.directory}/${spark.download.filename}</src>
                                     <type>archive</type>
-                                    <includes>${package.installdir}/bin/**,${package.installdir}/sbin/**</includes>
+                                    <includes>${package.fullversion}/bin/**,${package.fullversion}/sbin/**</includes>
 
                                     <mapper>
                                         <type>perm</type>
@@ -115,10 +115,10 @@
 
                                 </data>
 
-
                             </dataSet>
 
                         </configuration>
+
                     </execution>
                 </executions>
             </plugin>

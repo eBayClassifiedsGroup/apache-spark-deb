@@ -1,4 +1,4 @@
-# Spark 1.1.0 packaged for debian
+# Apache Spark packaged for debian
 
 This is a minimal wrapping around the .tar.gz files distributed from spark.
 
