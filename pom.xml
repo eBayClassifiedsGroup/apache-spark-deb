@@ -7,7 +7,7 @@
 
     <groupId>apache-spark</groupId>
     <artifactId>apache-spark</artifactId>
-    <version>1.6.2-1</version>
+    <version>2.0.0-1</version>
 
     <dependencies>
 
@@ -15,11 +15,11 @@
 
     <properties>
 
-        <package.fullversion>spark-1.6.2-bin-hadoop2.6</package.fullversion>
+        <package.fullversion>spark-2.0.0-bin-hadoop2.6</package.fullversion>
         <package.installdir>/usr/share/apache-spark</package.installdir>
 
         <spark.download.url>http://d3kbcqa49mib13.cloudfront.net</spark.download.url>
-        <spark.download.filename>spark-1.6.2-bin-hadoop2.6.tgz</spark.download.filename>
+        <spark.download.filename>spark-2.0.0-bin-hadoop2.6.tgz</spark.download.filename>
 
     </properties>
 
