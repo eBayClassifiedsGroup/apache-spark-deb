@@ -18,8 +18,8 @@
         <package.fullversion>spark-1.5.2-bin-hadoop2.6</package.fullversion>
         <package.installdir>/usr/share/apache-spark</package.installdir>
 
-		<spark.download.url>http://www.apache.org/dyn/closer.lua/spark/spark-1.5.2/</spark.download.url>
-		<spark.download.filename>spark-1.5.2-bin-hadoop2.6.tgz</spark.download.filename>
+        <spark.download.url>http://www-eu.apache.org/dist/spark/spark-1.5.2</spark.download.url>
+        <spark.download.filename>spark-1.5.2-bin-hadoop2.6.tgz</spark.download.filename>
 
     </properties>
 
